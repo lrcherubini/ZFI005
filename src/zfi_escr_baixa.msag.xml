@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+    <MASTERLANG>P</MASTERLANG>
+    <STEXT>EXT.FI.005 - Escritural de Baixas</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3 &amp;4.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Item de partida &amp;1 &amp;2 &amp;3 &amp;4 não encontrado.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Chave 3 / Nosso Número não informada na partida &amp;1 &amp;2 &amp;3 &amp;4.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

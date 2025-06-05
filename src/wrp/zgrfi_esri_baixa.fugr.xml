@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>EXT.FI.005 Escritural de baixa</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZGRFI_ESRI_BAIXATOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZGRFI_ESRI_BAIXA</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZFM_ESC_BAIXA_BTE_PROC_1430</FUNCNAME>
+     <SHORT_TEXT>Interface description</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_BKDF</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>BKDF</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>I_BKDFSUB</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BKDF_SUBST</TYP>
+      </RSCHA>
+     </CHANGING>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>T_BKPF</PARAMETER>
+       <DBSTRUCT>BKPF</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_BSEG</PARAMETER>
+       <DBSTRUCT>BSEG</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_BSEC</PARAMETER>
+       <DBSTRUCT>BSEC</DBSTRUCT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_BKPFSUB</PARAMETER>
+       <DBSTRUCT>BKPF_SUBST</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>T_BSEGSUB</PARAMETER>
+       <DBSTRUCT>BSEG_SUBST</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_BKDF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Document header supplement for recurring entry</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_BKPF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Document header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_BSEG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Document Line Items</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_BSEC</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>One-Time Account Data Document Segment</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_BKPFSUB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>DE-EN-LANG-SWITCH-NO-TRANSLATION</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>T_BSEGSUB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>DE-EN-LANG-SWITCH-NO-TRANSLATION</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_BKDFSUB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Process Interfaces: Substitutable fields during posting</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+   <LONGTEXTS_ZFM_ESC_BAIXA_BTE_PROC_1430>
+    <item>
+     <DOKIL>
+      <ID>FU</ID>
+      <OBJECT>ZFM_ESC_BAIXA_BTE_PROC_1430</OBJECT>
+      <LANGU>D</LANGU>
+      <TYP>T</TYP>
+      <VERSION>0003</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00023</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZFM_ESC_BAIXA_BTE_PROC_1430</TDNAME>
+      <TDID>FU</TDID>
+      <TDSPRAS>D</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00003</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>DEFINE &amp;TEXT&amp; = &apos;ÄNDERN BELEG: Feldsubstitution Kopf/Zeile&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>DEFINE &amp;EVENT&amp; = &apos;00001430&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>DEFINE &amp;TYPE&amp; = &apos;PROCESS&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOKU ID TX</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>LOCATION</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Der Prozess wird immer dann erreicht, wenn vor dem Ändern eines Beleges</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>sämtliche Schlußprüfungen abgeschlossen sind.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>INTERFACE</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>An die Zusatzkomponente werden (nur für Informationszwecke) die aktuell</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Belegköpfe (mehr als einer z.B. bei buchungskreisübergreifenden</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Vorgängen) und die korrespondierenden Belegzeilen übergeben. Diese</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Daten dürfen nicht bearbeitet werden. Stattdessen werden zwei weitere</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Tabellen (T_BKPFSUB, T_BSEGSUB) übergeben. Diese sind gefüllt mit den</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Inhalten der Felder, die substituierbar sind. Das Feld TABIX enthält</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>eine Zeilennummer, die anzeigt aus welcher Zeile in T_BSEG bzw. T_BKPF</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>die Feldinhalte stammen.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Beispiel:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>In der 2. Zeile der Tabelle T_BSEG soll der Feldinhalt von SGTXT</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>(Positionstext) mit dem Inhalt &apos;TEST&apos; substituiert werden. Das</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>erfordert im wesentlichen eine Anweisungsfolge der Form</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>READ TABLE T_BSEGSUB WITH KEY TABIX = 2.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>T_BSEGSUB-SGTXT = &apos;TEST&apos;.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>MODIFY T_BSEGSUB INDEX SY-TABIX.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+    <item>
+     <DOKIL>
+      <ID>FU</ID>
+      <OBJECT>ZFM_ESC_BAIXA_BTE_PROC_1430</OBJECT>
+      <LANGU>E</LANGU>
+      <TYP>T</TYP>
+      <VERSION>0003</VERSION>
+      <TXTLINES>00022</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZFM_ESC_BAIXA_BTE_PROC_1430</TDNAME>
+      <TDID>FU</TDID>
+      <TDSPRAS>E</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00003</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>DEFINE &amp;TEXT&amp; = &apos;CHANGE DOCUMENT: Header/line field substitution&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>DEFINE &amp;EVENT&amp; = &apos;00001430&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>DEFINE &amp;TYPE&amp; = &apos;PROCESS&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/:</TDFORMAT>
+       <TDLINE>INCLUDE FI_OPEN_FI_DOCUMENTATION_1 OBJECT DOKU ID TX LANGUAGE EN</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>LOCATION</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>This process is always reached when all the final checks have been</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>completed before a document is changed.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>INTERFACE</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>The current document headers (there will be more than one for</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>cross-company code transactions, for example) and corresponding line</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>items are transferred to the additional component, for information</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>purposes only. You must not edit this data. Instead, two additional</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>tables (T_BKPFSUB and T_BSEGSUB) are also transferred. The contents of</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>the fields that can be substituted are entered in these tables. Field</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>TABIX contains a line number which shows from which line in T_BSEG or</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>T_BKPF the field contents originate.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U1</TDFORMAT>
+       <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>In the second line of table T_BSEG, the field contents from SGTXT (item</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>text) should be replaced by the entry &apos;TEST&apos;. This basically requires a</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>statement sequence in the form</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>READ TABLE T_BSEGSUB WITH KEY TABIX = 2.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>T_BSEGSUB-SGTXT = &apos;TEST&apos;.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>MODIFY T_BSEGSUB INDEX SY-TABIX.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS_ZFM_ESC_BAIXA_BTE_PROC_1430>
+  </asx:values>
+ </asx:abap>
+</abapGit>
