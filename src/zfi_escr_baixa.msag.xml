@@ -26,6 +26,60 @@
      <MSGNR>002</MSGNR>
      <TEXT>Chave 3 / Nosso Número não informada na partida &amp;1 &amp;2 &amp;3 &amp;4.</TEXT>
     </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Item de partida &amp;1 &amp;2 &amp;3 &amp;4 não possui L/C.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Job FB08 escalonado &amp;1 &amp;2.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>CALL_FB08 processada com sucesso para doc. &amp;1 &amp;2 &amp;3.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erro ao ler parametros de impressão.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Escalonamento cancelado pelo usuário</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erro durante escalonamento, erro interno JOB_SUBMIT.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erro interno durante atribuição de contador.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Erro geral de escalonamento.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZFI_ESCR_BAIXA</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Processamento FB09 com sucesso &amp;1 &amp;2 &amp;3 &amp;4.</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

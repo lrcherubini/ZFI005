@@ -1,17 +1,18 @@
 *&---------------------------------------------------------------------*
-*& Report ZFI0001
+*& Report ZFI0002
 *&---------------------------------------------------------------------*
-
-REPORT zfi0001.
+*&
+*&---------------------------------------------------------------------*
+REPORT ZFI0002.
 
 DATA: gv_jobname  TYPE tbtco-jobname,
       gv_jobcount TYPE tbtco-jobcount.
 
-PARAMETERS: p_anfbu TYPE bseg-anfbu OBLIGATORY,
-            p_anfbn TYPE bseg-anfbn OBLIGATORY,
-            p_anfbj TYPE bseg-anfbj OBLIGATORY,
-            p_stgrd TYPE stgrd DEFAULT '01',
-            p_bldat TYPE bldat DEFAULT sy-datum.
+PARAMETERS: p_bukrs TYPE bseg-bukrs OBLIGATORY,
+            p_belnr TYPE bseg-belnr OBLIGATORY,
+            p_gjahr TYPE bseg-gjahr OBLIGATORY,
+            p_buzei TYPE bseg-buzei OBLIGATORY,
+            p_dtws1 TYPE bseg-dtws1 OBLIGATORY.
 
 START-OF-SELECTION.
 
@@ -29,29 +30,30 @@ START-OF-SELECTION.
 
   zcl_escrbxa_status=>update_status(
     iv_commit   = abap_true
-    iv_procs    = 'FB08'
-    iv_bukrs    = p_anfbu
-    iv_belnr    = p_anfbn
-    iv_gjahr    = p_anfbj
-    iv_status   = zif_escrbxa_status=>agendado
+    iv_procs    = 'FB09'
+    iv_bukrs    = p_bukrs
+    iv_belnr    = p_belnr
+    iv_gjahr    = p_gjahr
+    iv_buzei    = p_buzei
+    iv_status   = zif_escrbxa_status=>processando
     iv_jobname  = gv_jobname
     iv_jobcount = gv_jobcount
   ).
 
-  PERFORM zf_process_fb08.
+  PERFORM zf_process_fb09.
 
-FORM zf_process_fb08.
+FORM zf_process_fb09.
 
   DATA: ls_return TYPE bapiret2,
         lt_return TYPE bapiret2_tt.
 
-  zcl_job_fb08_wrapper=>process(
+  zcl_job_fb09_wrapper=>process(
     EXPORTING
-      iv_bukrs     = p_anfbu
-      iv_belnr     = p_anfbn
-      iv_gjahr     = p_anfbj
-      iv_stgrd     = p_stgrd
-      iv_bldat     = p_bldat
+      iv_bukrs     = p_bukrs
+      iv_belnr     = p_belnr
+      iv_gjahr     = p_gjahr
+      iv_buzei     = p_buzei
+      iv_dtws1     = p_dtws1
     IMPORTING
       ev_loghandle = DATA(lv_loghandle)
   ).
@@ -122,10 +124,11 @@ FORM zf_process_fb08.
 
       zcl_escrbxa_status=>update_status(
         iv_commit   = abap_true
-        iv_procs    = 'FB08'
-        iv_bukrs    = p_anfbu
-        iv_belnr    = p_anfbn
-        iv_gjahr    = p_anfbj
+        iv_procs    = 'FB09'
+        iv_bukrs    = p_bukrs
+        iv_belnr    = p_belnr
+        iv_gjahr    = p_gjahr
+        iv_buzei    = p_buzei
         iv_status   = COND #( WHEN lv_error IS INITIAL THEN zif_escrbxa_status=>sucesso ELSE zif_escrbxa_status=>erro )
         iv_jobname  = gv_jobname
         iv_jobcount = gv_jobcount

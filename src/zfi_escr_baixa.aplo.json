@@ -1,0 +1,22 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Escritural de baixa",
+    "originalLanguage": "pt",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "subobjects": [
+    {
+      "name": "FB08",
+      "description": "Processamento na FB08"
+    },
+    {
+      "name": "FB09",
+      "description": "Alteração em massa FB09"
+    },
+    {
+      "name": "PROCESS",
+      "description": "Processamento do Documento"
+    }
+  ]
+}
