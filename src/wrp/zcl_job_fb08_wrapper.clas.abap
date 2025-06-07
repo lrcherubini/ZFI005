@@ -92,11 +92,6 @@ CLASS zcl_job_fb08_wrapper IMPLEMENTATION.
     WAIT FOR ASYNCHRONOUS TASKS UNTIL gv_done EQ abap_true.
 
     IF gs_return IS NOT INITIAL.
-      RAISE EXCEPTION TYPE zcx_fi_escri_baixa
-        MESSAGE ID gs_return-id TYPE gs_return-type NUMBER gs_return-number
-          WITH gs_return-message_v1 gs_return-message_v2
-               gs_return-message_v3 gs_return-message_v4.
-
       zcl_escrbxa_status=>update_status(
         iv_commit   = abap_false
         iv_procs    = 'FB08'
@@ -107,6 +102,11 @@ CLASS zcl_job_fb08_wrapper IMPLEMENTATION.
         iv_jobname  = gv_jobname
         iv_jobcount = gv_jobcount
       ).
+
+      RAISE EXCEPTION TYPE zcx_fi_escri_baixa
+        MESSAGE ID gs_return-id TYPE gs_return-type NUMBER gs_return-number
+          WITH gs_return-message_v1 gs_return-message_v2
+               gs_return-message_v3 gs_return-message_v4.
 
     ENDIF.
 

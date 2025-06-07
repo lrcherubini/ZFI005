@@ -1,0 +1,12 @@
+managed with unmanaged save implementation in class zbp_i_operacctgdocitemwriteoff unique;
+strict ( 2 );
+
+define behavior for ZI_OperAcctgDocItemWriteOff alias DocItem
+
+lock master
+authorization master ( instance )
+
+{
+  field( readonly ) CompanyCode, AccountingDocument, FiscalYear, AccountingDocumentItem;
+  action fb09 result [1] $self;
+}

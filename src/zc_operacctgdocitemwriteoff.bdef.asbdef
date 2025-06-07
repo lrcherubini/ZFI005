@@ -1,0 +1,8 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_OperAcctgDocItemWriteOff alias DocItem
+{
+
+  use action fb09;
+}
