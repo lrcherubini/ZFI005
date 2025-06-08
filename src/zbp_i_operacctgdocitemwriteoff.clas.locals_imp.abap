@@ -28,13 +28,15 @@ CLASS lhc_docitem IMPLEMENTATION.
               accountingdocumentitem = ls_keys-accountingdocumentitem
           ) ).
 
-          lo_scrb->action_fb09(
-            IMPORTING
-              ev_jobname  = DATA(lv_jobname)
-              ev_jobcount = DATA(lv_jobcount)
-          ).
+      lo_scrb->action_fb09(
+        IMPORTING
+          ev_jobname  = DATA(lv_jobname)
+          ev_jobcount = DATA(lv_jobcount)
+      ).
 
-        CATCH zcx_fi_escri_baixa INTO DATA(lx_escrb).
+      APPEND VALUE #( %tky = ls_keys-%tky ) TO result.
+
+      CATCH zcx_fi_escri_baixa INTO DATA(lx_escrb).
 
       ENDTRY.
 

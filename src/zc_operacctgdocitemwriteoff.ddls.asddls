@@ -5,6 +5,7 @@
 @Search.searchable: true
 
 define root view entity ZC_OperAcctgDocItemWriteOff
+  alias DocItem
   provider contract transactional_query
   as projection on ZI_OperAcctgDocItemWriteOff
 {
@@ -54,6 +55,8 @@ define root view entity ZC_OperAcctgDocItemWriteOff
       TransactionTypeDetermination,
       ValueDate,
       AssignmentReference,
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.80
       DocumentItemText,
       @ObjectModel.foreignKey.association: '_PartnerCompany_2'
       PartnerCompany,
@@ -276,6 +279,8 @@ define root view entity ZC_OperAcctgDocItemWriteOff
       AccountingDocumentCategory,
 
       PostingDate,
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.80
       DocumentDate,
       @ObjectModel.foreignKey.association: '_AccountingDocumentType'
       AccountingDocumentType,
