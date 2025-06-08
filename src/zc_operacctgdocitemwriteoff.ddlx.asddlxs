@@ -7,12 +7,11 @@
 
 annotate entity ZC_OperAcctgDocItemWriteOff with
 {
-  @UI.facet: [{
-    id: 'idIdent',
-    type: #IDENTIFICATION_REFERENCE,
-    label: 'Item',
-    position: 10
-  }]
+  @UI.facet: [
+    { id: 'idIdent', type: #IDENTIFICATION_REFERENCE, label: 'Item', position: 10 },
+    { id: 'idPosting', type: #FIELDGROUP_REFERENCE, label: 'Posting Information', position: 20, targetQualifier: 'Posting' },
+    { id: 'idPayment', type: #FIELDGROUP_REFERENCE, label: 'Payment', position: 30, targetQualifier: 'Payment' }
+  ]
 
   @UI: {
     identification: [{ position: 10 }],
@@ -59,7 +58,13 @@ annotate entity ZC_OperAcctgDocItemWriteOff with
     selectionField: [{ position: 60 }],
     lineItem: [{ position: 70 }]
   }
+  @UI.fieldGroup: [{ qualifier: 'Posting', position: 20 }]
   PostingDate;
+@UI: {
+  lineItem: [{ position: 72 }]
+}
+@UI.fieldGroup: [{ qualifier: 'Posting', position: 10 }]
+DocumentDate;
 
   @UI: {
     lineItem: [{ position: 80 }]
@@ -77,10 +82,43 @@ annotate entity ZC_OperAcctgDocItemWriteOff with
   DataExchangeInstruction1;
 
   @UI: {
+    identification: [{ position: 110 }],
+    selectionField: [{ position: 70 }],
     lineItem: [{ position: 110 }]
   }
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.80
   DocumentItemText;
 
+@UI: {
+  lineItem: [{ position: 120 }]
+}
+@UI.fieldGroup: [{ qualifier: 'Posting', position: 30 }]
+GLAccount;
+
+@UI: {
+  lineItem: [{ position: 130 }]
+}
+@UI.fieldGroup: [{ qualifier: 'Payment', position: 10 }]
+PaymentTerms;
+
+@UI: {
+  lineItem: [{ position: 140 }]
+}
+@UI.fieldGroup: [{ qualifier: 'Payment', position: 20 }]
+PaymentMethod;
+
+@UI: {
+  lineItem: [{ position: 150 }]
+}
+@UI.fieldGroup: [{ qualifier: 'Payment', position: 30 }]
+NetPaymentAmount;
+
+@UI: {
+  lineItem: [{ position: 160 }]
+}
+@UI.fieldGroup: [{ qualifier: 'Payment', position: 40 }]
+AmountInCompanyCodeCurrency;
   @UI.lineItem: [{
     position: 990,
     type: #FOR_ACTION,
