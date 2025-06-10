@@ -14,6 +14,20 @@ define root view entity ZC_OperAcctgDocItemWriteOff
   key AccountingDocument,
   key FiscalYear,
   key AccountingDocumentItem,
+      UniqueKey,
+
+      FB08Jobcount,
+      FB08Jobname,
+      @ObjectModel.text.element: ['FB08StatusText']
+      FB08Status,
+      _FB08StatText[1: Language = $session.system_language].JobStatusText as FB08StatusText,
+      FB08StatusCriticality,
+
+      FB09Jobcount,
+      FB09Jobname,
+      FB09Status,
+      _FB09StatText[1: Language = $session.system_language].JobStatusText as FB09StatusText,
+      FB09StatusCriticality,
 
       @ObjectModel.foreignKey.association: '_ChartOfAccounts'
       ChartOfAccounts,
@@ -674,5 +688,11 @@ define root view entity ZC_OperAcctgDocItemWriteOff
       _TaxType,
       _TransactionCurrency,
       _WBSElementBasicData,
-      _WBSElementBasicDataText
+      _WBSElementBasicDataText,
+      _WriteOffJobFB08,
+      _WriteOffJobFB09,
+      _FB08StatText,
+      _FB09StatText,
+      _FB09Jobs,
+      _Logs
 }

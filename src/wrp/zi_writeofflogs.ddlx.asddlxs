@@ -1,0 +1,83 @@
+@Metadata.layer: #CORE
+@UI.presentationVariant: [
+  {
+    id: 'DefaultJobSort',
+    maxItems: 10,
+    visualizations: [{ type: #AS_LINEITEM }],
+    sortOrder: [{ by: 'ApplicationLogDateTime', direction: #DESC }]
+  }
+]
+@UI.headerInfo: {
+  typeName: 'Log',
+  typeNamePlural: 'Logs',
+  title: {
+      type: #STANDARD,
+      value: 'ApplicationLogExternalID'
+  }
+}
+annotate entity ZI_WriteOffLogs with
+{
+  @UI.facet: [
+    { id: 'idStatusHeader', purpose: #HEADER, type: #DATAPOINT_REFERENCE, position: 10, targetQualifier: 'Status' },
+    { id: 'idIdent', type: #IDENTIFICATION_REFERENCE, label: 'Detalhes', position: 10 }
+  ]
+
+  @UI.lineItem: [ {
+    position: 10
+  } ]
+  @UI.identification: [ {
+    position: 10
+  } ]
+  ApplicationLogSubObject;
+  @UI.lineItem: [ {
+    position: 15
+  } ]
+  @UI.identification: [ {
+    position: 15
+  } ]
+  ApplicationLogExternalID;
+  @UI.lineItem: [ {
+    position: 20,
+    label: 'Status',
+    criticality: 'Criticality',
+    criticalityRepresentation: #ONLY_ICON
+  } ]
+  @UI.identification: [ {
+    position: 20,
+    label: 'Status',
+    criticality: 'Criticality',
+    criticalityRepresentation: #ONLY_ICON
+  } ]
+  @UI.dataPoint: {
+    qualifier: 'Status',
+    title: 'Status',
+    criticality: 'Criticality',
+    criticalityRepresentation: #WITH_ICON
+  }
+  Criticality;
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  ApplicationLogDateTime;
+  @UI.lineItem: [ { position: 40 } ]
+  @UI.identification: [ { position: 40 } ]
+  ApplicationLogUser;
+  @UI.lineItem: [ { position: 50 } ]
+  @UI.identification: [ { position: 50 } ]
+  NumberOfAllMessages;
+  @UI.lineItem: [ { position: 60 } ]
+  @UI.identification: [ { position: 60 } ]
+  NumberOfAbortMessages;
+  @UI.lineItem: [ { position: 70 } ]
+  @UI.identification: [ { position: 70 } ]
+  NumberOfErrorMessages;
+  @UI.lineItem: [ { position: 80 } ]
+  @UI.identification: [ { position: 80 } ]
+  NumberOfWarningMessages;
+  @UI.lineItem: [ { position: 90 } ]
+  @UI.identification: [ { position: 90 } ]
+  NumberOfInformationMessages;
+  @UI.lineItem: [ { position: 100 } ]
+  @UI.identification: [ { position: 100 } ]
+  NumberOfStatusMessages;
+
+}

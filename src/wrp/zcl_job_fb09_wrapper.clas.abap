@@ -171,7 +171,7 @@ CLASS zcl_job_fb09_wrapper IMPLEMENTATION.
           header = cl_bali_header_setter=>create(
             object      = zif_fi_escritural_baixa=>gc_applog-object
             subobject   = zif_fi_escritural_baixa=>gc_applog-sb_fb09
-            external_id = |{ iv_bukrs }{ iv_belnr }{ iv_gjahr }|
+            external_id = |{ iv_bukrs }{ iv_belnr }{ iv_gjahr }{ iv_buzei }|
           )
         ).
 

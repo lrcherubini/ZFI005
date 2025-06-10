@@ -1,0 +1,90 @@
+@Metadata.layer: #CORE
+@UI.presentationVariant: [
+  {
+    id: 'DefaultJobSort',
+    maxItems: 10,
+    visualizations: [{ type: #AS_LINEITEM }],
+    sortOrder: [{ by: 'ReleaseDate', direction: #DESC },
+                { by: 'ReleaseTime', direction: #DESC }]
+  }
+]
+@UI.headerInfo: {
+  typeName: 'Job',
+  typeNamePlural: 'Jobs',
+  title: {
+      type: #STANDARD,
+      value: 'ApplicationJobName'
+  }
+}
+annotate entity ZI_JobStatus2 with
+{
+  @UI.facet: [
+    { id: 'idStatusHeader', purpose: #HEADER, type: #DATAPOINT_REFERENCE, position: 10, targetQualifier: 'Status' },
+    { id: 'idIdent', type: #IDENTIFICATION_REFERENCE, label: 'Detalhes', position: 10 }
+  ]
+
+  @UI.lineItem       : [ {
+    position         : 10,
+    label            : 'Job'
+  } ]
+  @UI.identification: [{
+    position         : 10,
+    label            : 'Job'
+  }]
+  ApplicationJobName;
+  @UI.lineItem       : [ {
+    position         : 20,
+    label            : 'Numerador'
+  } ]
+  @UI.identification: [{
+    position         : 20,
+    label            : 'Numerador'
+  }]
+  ApplicationJob;
+  @UI.lineItem       : [ {
+    position         : 30,
+    label            : 'Usuário do Job'
+  } ]
+  @UI.identification: [{
+    position         : 30,
+    label            : 'Usuário do Job'
+  }]
+  ScheduledByUser;
+  @UI.lineItem       : [ {
+    position         : 40,
+    criticality      : 'StatusCriticality',
+    criticalityRepresentation: #WITH_ICON,
+    label            : 'Status'
+  } ]
+  @UI.identification: [{
+    position         : 40,
+    criticality      : 'StatusCriticality',
+    criticalityRepresentation: #WITH_ICON,
+    label            : 'Status'
+  }]
+  @UI.dataPoint: {
+    qualifier: 'Status',
+    title: 'Status',
+    criticality: 'StatusCriticality',
+    criticalityRepresentation: #WITH_ICON
+  }
+  StatusText;
+  @UI.lineItem       : [ {
+    position         : 50,
+    label            : 'Data Liberação'
+  } ]
+  @UI.identification: [{
+    position         : 50,
+    label            : 'Data Liberação'
+  }]
+  ReleaseDate;
+  @UI.lineItem       : [ {
+    position         : 60,
+    label            : 'Hora Liberação'
+  } ]
+  @UI.identification: [{
+    position         : 60,
+    label            : 'Hora Liberação'
+  }]
+  ReleaseTime;
+}

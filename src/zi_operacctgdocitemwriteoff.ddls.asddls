@@ -3,11 +3,44 @@
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_OperAcctgDocItemWriteOff
   as select from ZI_OperationalAcctgDocItem
+  association [0..1] to ZI_WriteOffJobFB08     as _WriteOffJobFB08 on  ZI_OperationalAcctgDocItem.CompanyCode            = _WriteOffJobFB08.CompanyCode
+                                                                   and ZI_OperationalAcctgDocItem.AccountingDocument     = _WriteOffJobFB08.AccountingDocument
+                                                                   and ZI_OperationalAcctgDocItem.FiscalYear             = _WriteOffJobFB08.FiscalYear
+                                                                   and ZI_OperationalAcctgDocItem.AccountingDocumentItem = _WriteOffJobFB08.AccountingDocumentItem
+  association [0..1] to ZI_WriteOffJobFB09     as _WriteOffJobFB09 on  ZI_OperationalAcctgDocItem.CompanyCode            = _WriteOffJobFB09.CompanyCode
+                                                                   and ZI_OperationalAcctgDocItem.AccountingDocument     = _WriteOffJobFB09.AccountingDocument
+                                                                   and ZI_OperationalAcctgDocItem.FiscalYear             = _WriteOffJobFB09.FiscalYear
+                                                                   and ZI_OperationalAcctgDocItem.AccountingDocumentItem = _WriteOffJobFB09.AccountingDocumentItem
+  association [0..*] to ZI_WriteOffJobStatText as _FB08StatText    on  $projection.FB08Status = _FB08StatText.JobStatus
+  association [0..*] to ZI_WriteOffJobStatText as _FB09StatText    on  $projection.FB09Status = _FB09StatText.JobStatus
+  association [0..*] to ZI_JobStatus2          as _FB09Jobs        on  $projection.FB09Jobname = _FB09Jobs.ApplicationJobName
+  association [0..*] to ZI_WriteOffLogs        as _Logs            on  $projection.UniqueKey = _Logs.ApplicationLogExternalID
 {
   key CompanyCode,
   key AccountingDocument,
   key FiscalYear,
   key AccountingDocumentItem,
+      concat(concat(concat(CompanyCode, AccountingDocument), FiscalYear), AccountingDocumentItem) as UniqueKey,
+
+      _WriteOffJobFB08.Jobcount                                                                   as FB08Jobcount,
+      _WriteOffJobFB08.Jobname                                                                    as FB08Jobname,
+      _WriteOffJobFB08.Status                                                                     as FB08Status,
+      case _WriteOffJobFB08.Status
+        when '01' then 5  // Agendado
+        when '02' then 1  // Processando
+        when '03' then 3  // Sucesso
+        when '04' then 2  // Erro
+        else 0 end                                                                                as FB08StatusCriticality,
+
+      _WriteOffJobFB09.Jobcount                                                                   as FB09Jobcount,
+      _WriteOffJobFB09.Jobname                                                                    as FB09Jobname,
+      _WriteOffJobFB09.Status                                                                     as FB09Status,
+      case _WriteOffJobFB09.Status
+        when '01' then 5  // Agendado
+        when '02' then 1  // Processando
+        when '03' then 3  // Sucesso
+        when '04' then 2  // Erro
+        else 0 end                                                                                as FB09StatusCriticality,
 
       @ObjectModel.foreignKey.association: '_ChartOfAccounts'
       ChartOfAccounts,
@@ -535,7 +568,7 @@ define root view entity ZI_OperAcctgDocItemWriteOff
 
       _JournalEntry.DocumentReferenceID,
 
-      cast('' as abap_boolean) as actionFB09,
+      cast('' as abap_boolean)                                                                    as actionFB09,
 
       /* Associations */
       _AccountingDocumentCategory,
@@ -657,11 +690,17 @@ define root view entity ZI_OperAcctgDocItemWriteOff
       _TaxType,
       _TransactionCurrency,
       _WBSElementBasicData,
-      _WBSElementBasicDataText
+      _WBSElementBasicDataText,
+      _WriteOffJobFB08,
+      _WriteOffJobFB09,
+      _FB08StatText,
+      _FB09StatText,
+      _FB09Jobs,
+      _Logs
 }
 where
-      DebitCreditCode      = 'S'
-  and ClearingJournalEntry = ''
-//and FinancialAccountType       =  'D'
-//and AccountingDocumentCategory <> 'D'
-//and AccountingDocumentCategory <> 'M'
+      DebitCreditCode            =  'S'
+  and ClearingJournalEntry       =  ''
+  and FinancialAccountType       =  'D'
+  and AccountingDocumentCategory <> 'D'
+  and AccountingDocumentCategory <> 'M'

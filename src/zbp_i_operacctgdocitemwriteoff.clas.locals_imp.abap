@@ -34,9 +34,60 @@ CLASS lhc_docitem IMPLEMENTATION.
               ev_jobcount = DATA(lv_jobcount)
           ).
 
+          READ ENTITIES OF zi_operacctgdocitemwriteoff  IN LOCAL MODE
+            ENTITY docitem
+              ALL FIELDS WITH VALUE #( ( %key = CORRESPONDING #( ls_keys ) ) )
+            RESULT DATA(lt_docitem)
+            FAILED DATA(lt_loc_failed)
+            REPORTED DATA(lt_loc_reported).
+
+          LOOP AT lt_docitem INTO DATA(ls_docitem).
+
+            APPEND VALUE #( %cid_ref               = ls_keys-%cid_ref
+                            companycode            = ls_keys-companycode
+                            accountingdocument     = ls_keys-accountingdocument
+                            fiscalyear             = ls_keys-fiscalyear
+                            accountingdocumentitem = ls_keys-accountingdocumentitem
+                            %param                 = CORRESPONDING #( ls_docitem ) ) TO result.
+
+            APPEND VALUE #( %cid                   = ls_keys-%cid_ref
+                            companycode            = ls_keys-companycode
+                            accountingdocument     = ls_keys-accountingdocument
+                            fiscalyear             = ls_keys-fiscalyear
+                            accountingdocumentitem = ls_keys-accountingdocumentitem
+                            %msg                   = new_message(
+                            id       = 'ZFI_ESCR_BAIXA'
+                            number   = '012'
+                            severity = if_abap_behv_message=>severity-success
+                            v1       = lv_jobname
+                            v2       = lv_jobcount )
+            ) TO reported-docitem.
+
+          ENDLOOP.
+
         CATCH zcx_fi_escri_baixa INTO DATA(lx_escrb).
+          APPEND VALUE #( %cid                   = ls_keys-%cid_ref
+                          companycode            = ls_keys-companycode
+                          accountingdocument     = ls_keys-accountingdocument
+                          fiscalyear             = ls_keys-fiscalyear
+                          accountingdocumentitem = ls_keys-accountingdocumentitem
+          ) TO failed-docitem.
+
+          APPEND VALUE #( %cid                   = ls_keys-%cid_ref
+                          companycode            = ls_keys-companycode
+                          accountingdocument     = ls_keys-accountingdocument
+                          fiscalyear             = ls_keys-fiscalyear
+                          accountingdocumentitem = ls_keys-accountingdocumentitem
+                          %msg                   = new_message_with_text(
+                          severity = if_abap_behv_message=>severity-error
+                          text     = lx_escrb->get_text( ) )
+          ) TO reported-docitem.
 
       ENDTRY.
+
+      CLEAR: lt_docitem,
+             lt_loc_failed,
+             lt_loc_reported.
 
     ENDLOOP.
 

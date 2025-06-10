@@ -1,18 +1,26 @@
 @Metadata.layer: #CUSTOMER
+@Search.searchable: true
 @UI.headerInfo: {
   typeName: 'Item Escritural de Baixa',
   typeNamePlural: 'Itens Escritural de Baixa',
+  title: {
+      type: #STANDARD,
+      value: 'AccountingDocument'
+  },
   description: { type: #STANDARD, value: 'DocumentItemText'}
 }
 
 annotate entity ZC_OperAcctgDocItemWriteOff with
 {
-  @UI.facet: [{
-    id: 'idIdent',
-    type: #IDENTIFICATION_REFERENCE,
-    label: 'Item',
-    position: 10
-  }]
+  @UI.facet: [
+    { id: 'idStatusHeader', purpose: #HEADER, type: #DATAPOINT_REFERENCE, position: 10, targetQualifier: 'FB09Status' },
+    { id: 'idIdent', type: #IDENTIFICATION_REFERENCE, label: 'Detalhes', position: 10 },
+    { id: 'idPosting', type: #FIELDGROUP_REFERENCE, label: 'Lançamento', position: 20, targetQualifier: 'Posting' },
+    { id: 'idPayment', type: #FIELDGROUP_REFERENCE, label: 'Pagamento', position: 30, targetQualifier: 'Payment' },
+    { id: 'idFB09', type: #FIELDGROUP_REFERENCE, label: 'Job FB09', position: 50, targetQualifier: 'FB09' },
+    { id: 'idFB09Jobs', type: #LINEITEM_REFERENCE, label: 'Histórico Jobs FB09', position: 60, targetElement: '_FB09Jobs' },
+    { id: 'idLogs', type: #LINEITEM_REFERENCE, label: 'Histórico Logs', position: 70, targetElement: '_Logs' }
+  ]
 
   @UI: {
     identification: [{ position: 10 }],
@@ -57,29 +65,100 @@ annotate entity ZC_OperAcctgDocItemWriteOff with
 
   @UI: {
     selectionField: [{ position: 60 }],
-    lineItem: [{ position: 70 }]
+    lineItem: [{
+      position: 70,
+      importance: #LOW
+    }]
   }
+  @UI.fieldGroup: [{ qualifier: 'Posting', position: 20 }]
   PostingDate;
+
+  @UI: {
+    lineItem: [{
+      position: 72,
+      importance: #LOW
+    }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Posting', position: 10 }]
+  DocumentDate;
 
   @UI: {
     lineItem: [{ position: 80 }]
   }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 80 }]
   ZZBoEPayRequest;
 
   @UI: {
     lineItem: [{ position: 90 }]
   }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 90 }]
   Reference3IDByBusinessPartner;
 
   @UI: {
     lineItem: [{ position: 100 }]
   }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 45 }]
   DataExchangeInstruction1;
 
   @UI: {
-    lineItem: [{ position: 110 }]
+    identification: [{ position: 70 }],
+    selectionField: [{ position: 70 }],
+    lineItem: [{
+      position: 110,
+      importance: #LOW
+    }]
   }
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.80
   DocumentItemText;
+
+  @UI: {
+    lineItem: [{ position: 120 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Posting', position: 30 }]
+  GLAccount;
+
+  @UI: {
+    lineItem: [{ position: 130 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 10 }]
+  PaymentTerms;
+
+  @UI: {
+    lineItem: [{ position: 140 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 20 }]
+  PaymentMethod;
+
+  @UI: {
+    lineItem: [{ position: 150 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 30 }]
+  NetPaymentAmount;
+
+  @UI: {
+    lineItem: [{ position: 160 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 40 }]
+  AmountInCompanyCodeCurrency;
+
+  @UI: {
+  lineItem: [{ position: 170 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 50 }]
+  DataExchangeInstruction2;
+
+  @UI: {
+  lineItem: [{ position: 180 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 60 }]
+  DataExchangeInstruction3;
+
+  @UI: {
+  lineItem: [{ position: 190 }]
+  }
+  @UI.fieldGroup: [{ qualifier: 'Payment', position: 70 }]
+  DataExchangeInstruction4;
 
   @UI.lineItem: [{
     position: 990,
@@ -95,5 +174,31 @@ annotate entity ZC_OperAcctgDocItemWriteOff with
     label: 'Baixar'
   }]
   actionFB09;
+
+  @UI.lineItem: [{
+    position: 200,
+    criticality: 'FB09StatusCriticality',
+    criticalityRepresentation: #WITH_ICON,
+    label: 'St. Job FB09',
+    importance: #HIGH
+  }]
+  @UI.fieldGroup: [{
+    qualifier: 'FB09',
+    position: 10,
+    label: 'Status',
+    criticality: 'FB09StatusCriticality',
+    criticalityRepresentation: #WITH_ICON
+  }]
+  @UI.dataPoint: {
+    qualifier: 'FB09Status',
+    title: 'Status FB09',
+    criticality: 'FB09StatusCriticality',
+    criticalityRepresentation: #WITH_ICON
+  }
+  FB09StatusText;
+  @UI.fieldGroup: [{ qualifier: 'FB09', position: 20, label: 'Contador' }]
+  FB09Jobcount;
+  @UI.fieldGroup: [{ qualifier: 'FB09', position: 30, label: 'Nome' }]
+  FB09Jobname;
 
 }

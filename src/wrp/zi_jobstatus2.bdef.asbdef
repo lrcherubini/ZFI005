@@ -1,0 +1,12 @@
+managed with unmanaged save implementation in class zbp_i_jobstatus2 unique;
+strict ( 2 );
+
+define behavior for ZI_JobStatus2 //alias <alias_name>
+
+lock master
+authorization master ( instance )
+
+{
+  field( readonly ) ApplicationJob, ApplicationJobName;
+
+}

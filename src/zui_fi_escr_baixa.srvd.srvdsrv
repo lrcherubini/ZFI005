@@ -1,4 +1,6 @@
 @EndUserText.label: 'Escritural de Baixa'
 define service ZUI_FI_ESCR_BAIXA {
   expose ZC_OperAcctgDocItemWriteOff as AcctgDocItem;
+  expose ZI_JobStatus2               as JobStatus;
+  expose ZI_WriteOffLogs             as Logs;
 }
